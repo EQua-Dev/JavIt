@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_overview"
+            android:icon="@drawable/ic_baseline_web_24"
+            android:title="@string/menu_overview" />
+        <item
+            android:id="@+id/nav_tutorial"
+            android:icon="@drawable/ic_baseline_school_24"
+            android:title="@string/menu_tutorials" />
+        <item
+            android:id="@+id/nav_snippets"
+            android:icon="@drawable/ic_baseline_code_24"
+            android:title="@string/menu_snippets" />
+        <item
+            android:id="@+id/nav_quiz"
+            android:icon="@drawable/ic_baseline_menu_book_24"
+            android:title="@string/menu_quiz" />
+    </group>
+
+    <item android:title="@string/menu_utilities">
+
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_baseline_settings_24"
+                android:title="@string/menu_settings" />
+
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_baseline_exit_to_app_24"
+                android:title="@string/menu_logout" />
+        </menu>
+
+    </item>
+</menu>

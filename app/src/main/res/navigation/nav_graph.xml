@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_overview">
+    <fragment
+        android:id="@+id/nav_overview"
+        android:name="com.androidstrike.javit.landing.fragments.Overview"
+        android:label="@string/menu_overview"
+        tools:layout="@layout/fragment_overview" />
+    <fragment
+        android:id="@+id/nav_tutorial"
+        android:name="com.androidstrike.javit.landing.fragments.Tutorials"
+        android:label="@string/menu_tutorials"
+        tools:layout="@layout/fragment_tutorials" />
+    <fragment
+        android:id="@+id/nav_snippets"
+        android:name="com.androidstrike.javit.landing.fragments.Snippets"
+        android:label="@string/menu_snippets"
+        tools:layout="@layout/fragment_snippets" />
+    <fragment
+        android:id="@+id/nav_quiz"
+        android:name="com.androidstrike.javit.landing.fragments.Quiz"
+        android:label="@string/menu_quiz"
+        tools:layout="@layout/fragment_quiz" />
+</navigation>
