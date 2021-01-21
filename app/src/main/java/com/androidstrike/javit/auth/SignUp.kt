@@ -26,7 +26,6 @@ class SignUp : Fragment() {
     private var userId:String?=null
     private var emailAddress:String?=null
 
-    var stud_dept:String?=null
 
 
     override fun onCreateView(
@@ -49,8 +48,6 @@ class SignUp : Fragment() {
             val email = et_new_email.text.toString().trim()
             val password = et_new_password.text.toString().trim()
             val confirm_password = et_new_confirm_password.text.toString().trim()
-            val stud_name = et_new_user_name.text.toString().trim()
-            val phone = et_new_phone_number.text.toString().trim()
 
 
 //            if the email and password fields are empty we display error messages

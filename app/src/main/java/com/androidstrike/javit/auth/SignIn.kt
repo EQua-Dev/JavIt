@@ -42,7 +42,7 @@ class SignIn : Fragment() {
 
 
 //        here we initialize the instance of the Firebase Auth
-        FirebaseApp.initializeApp(context!!)
+        FirebaseApp.initializeApp(requireContext())
         mAuth = FirebaseAuth.getInstance()
         firebaseUser = mAuth!!.currentUser
 
@@ -119,7 +119,7 @@ class SignIn : Fragment() {
         val usrInfoListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 usrModel = snapshot.getValue(User::class.java)
-                Common.student_name = usrModel!!.name
+//                Common.student_name = usrModel!!.name
             }
 
             override fun onCancelled(error: DatabaseError) {

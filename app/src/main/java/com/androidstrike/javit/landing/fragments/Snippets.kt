@@ -1,34 +1,30 @@
 package com.androidstrike.javit.landing.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.androidstrike.cofepa.utils.toast
 import com.androidstrike.javit.R
+import com.androidstrike.javit.adapters.ModulesViewHolder
+import com.androidstrike.javit.adapters.SnippetsViewHolder
+import com.androidstrike.javit.interfaces.IRecyclerItemClickListener
+import com.androidstrike.javit.models.Modules
+import com.androidstrike.javit.models.Snippet
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.fragment_snippets.*
+import kotlinx.android.synthetic.main.fragment_tutorials.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Snippets.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Snippets : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    var adapter: FirebaseRecyclerAdapter<Snippet, SnippetsViewHolder>? = null
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -36,23 +32,78 @@ class Snippets : Fragment() {
         return inflater.inflate(R.layout.fragment_snippets, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Snippets.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-                Snippets().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        val layoutManager = LinearLayoutManager(activity)
+        rv_snippets.layoutManager = layoutManager
+        rv_snippets.addItemDecoration(DividerItemDecoration(activity, layoutManager.orientation))
+
+        loadSnippets()
+    }
+
+    private fun loadSnippets() {
+        pb_snips.visibility = View.VISIBLE
+        val query = FirebaseDatabase.getInstance().getReference("Snippets")
+
+        val options = FirebaseRecyclerOptions.Builder<Snippet>()
+            .setQuery(query, Snippet::class.java)
+            .build()
+
+        Log.d("EQUA", "loadModules: query path check")
+
+        adapter = object : FirebaseRecyclerAdapter<Snippet, SnippetsViewHolder>(options) {
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SnippetsViewHolder {
+                val itemView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.layout_snippets, parent, false)
+                Log.d("EQUA", "onCreateViewHolder: inflated")
+                return SnippetsViewHolder(itemView)
+
+            }
+
+            override fun onBindViewHolder(holder: SnippetsViewHolder, position: Int, model: Snippet) {
+                holder.txt_snippet_name.text = StringBuilder(model.name!!)
+
+                Log.d("EQUA", "onBindViewHolder: holders set")
+                pb_snips.visibility = View.GONE
+
+                holder.setClick(object : IRecyclerItemClickListener {
+                    override fun onItemClickListener(view: View, position: Int) {
+                        openSnippet(model)
                     }
-                }
+
+                })
+
+            }
+
+        }
+
+        adapter!!.startListening()
+        rv_snippets.adapter = adapter
+    }
+
+    private fun openSnippet(model: Snippet) {
+        activity?.toast("${model.name} clicked!! ")
+        val snipName = model.name
+        val snipText = model.text
+        val snipInput = model.input_link
+        val snipOutput = model.output_link
+
+        val frag_snip = SnippetCode()
+
+        val bundle = Bundle()
+        bundle.putString("snipName", snipName)
+        bundle.putString("snipText", snipText)
+        bundle.putString("snipIn", snipInput)
+        bundle.putString("snipOut", snipOutput)
+        frag_snip.arguments = bundle
+
+
+        val manager = fragmentManager
+
+        val frag_transaction = manager?.beginTransaction()
+
+        frag_transaction?.replace(R.id.fragment_container, frag_snip)
+        frag_transaction?.commit()
     }
 }

@@ -34,4 +34,7 @@
 
     <string name="menu_utilities">Utilities</string>
 
+    <string name="advice_snip">Before you look, Try Guess the Output</string>
+    <string name="pointer_snip">Below is a Code Snippet to Illustrate</string>
+
 </resources>

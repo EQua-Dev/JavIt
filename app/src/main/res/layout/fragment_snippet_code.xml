@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".landing.fragments.SnippetCode">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:layout_margin="8dp"
+        android:id="@+id/cv_name">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:id="@+id/tv_snip_name"
+                android:text="Hello World"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="24sp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="4dp"
+                android:layout_margin="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:id="@+id/tv_snip_info"
+                    android:text="lorem ipsum ciflss jajei ndcakjsb fkj weufjeb wefbiejebsekuh erksfreiukiu \n yfqqgwqeyygefyg weayrfuysreuy erfvuesvy \n \n yuwgwdfyusfverfveyrtfvcsfvhcsj"
+                    android:textColor="@color/black" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cv_name"
+        android:id="@+id/txt_snip_pointer"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="@string/pointer_snip"/>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        android:layout_margin="12dp"
+        android:id="@+id/cv_img_input"
+        android:layout_below="@id/txt_snip_pointer">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_input"
+            android:src="@drawable/oops_image"/>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cv_img_input"
+        android:id="@+id/txt_snip_advice"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="@string/advice_snip"/>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        android:layout_margin="12dp"
+        android:layout_below="@id/txt_snip_advice">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_output"
+            android:src="@drawable/oops_image"/>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
