@@ -73,6 +73,7 @@ class Tutorials : Fragment() {
 
                 holder.setClick(object : IRecyclerItemClickListener {
                     override fun onItemClickListener(view: View, position: Int) {
+
                         startTutorial(model)
                     }
 
@@ -88,12 +89,12 @@ class Tutorials : Fragment() {
 
     private fun startTutorial(model: Modules) {
 
-        val youTubePlayerFragment = requireActivity().supportFragmentManager
-                .findFragmentById(R.id.official_player_view) as YouTubePlayerSupportFragment?
+//        val youTubePlayerFragment = requireActivity().supportFragmentManager
+//                .findFragmentById(R.id.official_player_view) as YouTubePlayerSupportFragment?
 
         activity?.toast("${model.id + model.name} clicked!! ")
-        val modelVideo = model.video_link
-        val modelInfo = model.text
+        var modelVideo = model.video_link
+        var modelInfo = model.text
 
         val frag_mod = Module()
 
@@ -109,6 +110,8 @@ class Tutorials : Fragment() {
 
         frag_transaction?.replace(R.id.fragment_container, frag_mod)
         frag_transaction?.commit()
+
+
     }
 
     override fun onStop() {

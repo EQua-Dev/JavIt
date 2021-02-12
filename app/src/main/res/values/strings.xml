@@ -37,4 +37,14 @@
     <string name="advice_snip">Before you look, Try Guess the Output</string>
     <string name="pointer_snip">Below is a Code Snippet to Illustrate</string>
 
+    <string name="btn_start_quiz">Take Quiz</string>
+
+    <string name="txt_done_score">Score : 0</string>
+    <string name="txt_passed_question">Passed : 0/30</string>
+    <string name="btn_retake_quiz">TRY AGAIN</string>
+
+    <string name="txt_score">Score</string>
+
+
+
 </resources>

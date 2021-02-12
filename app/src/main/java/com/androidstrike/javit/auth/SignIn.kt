@@ -47,6 +47,9 @@ class SignIn : Fragment() {
         firebaseUser = mAuth!!.currentUser
 
         button_sign_in.setOnClickListener {
+
+            progress_sign_in.visibility = View.VISIBLE
+
             val email = et_email.text.toString().trim()
             val password = et_password.text.toString().trim()
 
@@ -73,6 +76,8 @@ class SignIn : Fragment() {
             }
 
             loginUser(email, password)
+            progress_sign_in.visibility = View.GONE
+
         }
 
         tv_new_account.setOnClickListener {
@@ -92,7 +97,6 @@ class SignIn : Fragment() {
     }
 
     private fun loginUser(email: String, password: String) {
-        progress_sign_in.visibility = View.VISIBLE
 
         //todo check if the username exists in the realtime database then perform login
         mAuth?.signInWithEmailAndPassword(email, password)
@@ -103,7 +107,6 @@ class SignIn : Fragment() {
                     Common.currentUser = User(firebaseUser?.uid!!, firebaseUser!!.email)
                     activity?.login()
 
-                    progress_sign_in.visibility = View.GONE
 
 
                 } else {

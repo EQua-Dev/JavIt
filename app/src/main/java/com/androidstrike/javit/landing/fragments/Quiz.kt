@@ -1,58 +1,159 @@
 package com.androidstrike.javit.landing.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.CountDownTimer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.fragment.app.Fragment
+import com.androidstrike.cofepa.utils.toast
 import com.androidstrike.javit.R
+import com.androidstrike.javit.models.Question
+import com.androidstrike.javit.utils.Common
+import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.fragment_quiz.*
+import java.lang.StringBuilder
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Quiz.newInstance] factory method to
- * create an instance of this fragment.
- */
-class Quiz : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class Quiz : Fragment(), View.OnClickListener {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    val INTERVAL: Long = 1000 //1 sec
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    val TIMEOUT: Long = 15000 //15 secs
+
+    var progressValue = 0
+
+    var mCountDown: CountDownTimer? = null
+
+    var index = 0
+    private var score:Int = 0
+    private var thisQuestion:Int = 0
+    var totalQuestion:Int = Common.questionList.size
+    private var correctAnswer:Int = 0
+
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_quiz, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Quiz.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-                Quiz().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
-                }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        showQuestion(index)
+
+        btn_answerA?.setOnClickListener(this)
+        btn_answerB?.setOnClickListener(this)
+        btn_answerC?.setOnClickListener(this)
+        btn_answerD?.setOnClickListener(this)
+
+    }
+
+
+
+
+    override fun onClick(v: View?) {
+        mCountDown?.cancel()
+        if (index < totalQuestion){
+
+            var clickedButton =  v as Button
+            if (clickedButton.text.equals(Common.questionList[index].correctAnswer)){
+                activity?.toast(clickedButton.text.toString())
+                score += 10
+                correctAnswer++
+                showQuestion(index++)
+            }else{
+                showQuestion(index++)
+            }
+
+            txt_score?.text = String.format("%d", score)
+        }
+        else{
+            val frag_done = QuizDone()
+
+            val bundle = Bundle()
+            bundle.putInt("SCORE", score)
+            bundle.putInt("TOTAL", totalQuestion!!)
+            bundle.putInt("CORRECT", correctAnswer)
+            frag_done.arguments = bundle
+
+
+            val manager = fragmentManager
+
+            val frag_transaction = manager?.beginTransaction()
+
+            frag_transaction?.replace(R.id.fragment_container, frag_done)
+            frag_transaction?.commit()
+        }
+    }
+
+    private fun showQuestion(i: Int) {
+        pb_quiz.visibility = View.VISIBLE
+        if (i < totalQuestion){
+            thisQuestion++
+            txt_total_question?.text = String.format("%d/ %d", thisQuestion, totalQuestion)
+            progress_bar?.progress = 0
+            progressValue = 0
+
+            question_text.text = Common.questionList[i].question.toString()
+//            question_text.text = Common.questionList.get(index).question.toString()
+
+            Log.d("EQUA", "showQuestion: ${Common.questionList.get(i).question.toString()}")
+
+            btn_answerA.text = Common.questionList[i].answerA.toString()
+            btn_answerB.text = Common.questionList[i].answerB.toString()
+            btn_answerC.text = Common.questionList[i].answerC.toString()
+            btn_answerD.text = Common.questionList[i].answerD.toString()
+
+            pb_quiz.visibility = View.GONE
+            mCountDown?.start()
+        }
+        else{
+            val frag_done = QuizDone()
+
+            val bundle = Bundle()
+            bundle.putInt("SCORE", score)
+            bundle.putInt("TOTAL", totalQuestion!!)
+            bundle.putInt("CORRECT", correctAnswer)
+            frag_done.arguments = bundle
+
+
+            val manager = fragmentManager
+
+            val frag_transaction = manager?.beginTransaction()
+
+            frag_transaction?.replace(R.id.fragment_container, frag_done)
+            frag_transaction?.commit()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        totalQuestion = Common.questionList.size
+        mCountDown = object : CountDownTimer(TIMEOUT, INTERVAL){
+            override fun onTick(millisUntilFinished: Long) {
+                progress_bar?.progress = progressValue
+                progressValue++
+            }
+
+            override fun onFinish() {
+                mCountDown?.cancel()
+                showQuestion(index++)
+            }
+
+        }
+        showQuestion(index)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    Log.d("EQUA", "onDestroy: Destroyed")
     }
 }

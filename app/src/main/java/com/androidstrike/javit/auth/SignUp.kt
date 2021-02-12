@@ -125,11 +125,11 @@ class SignUp : Fragment() {
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        // if the current user is already signed in onStart of the application, the login function is called
-        mAuth.currentUser?.let {
-            activity?.login()
-        }
-    }
+//    override fun onStart() {
+////        super.onStart()
+//        // if the current user is already signed in onStart of the application, the login function is called
+//        mAuth.currentUser?.let {
+//            activity?.login()
+//        }
+//    }
 }

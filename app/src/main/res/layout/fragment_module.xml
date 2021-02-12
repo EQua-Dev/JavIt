@@ -3,28 +3,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".landing.fragments.Module">
 
-<!--    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:id="@+id/third_party_player_view"/>-->
-
-<!--    <com.google.android.youtube.player.YouTubePlayerView-->
+<!--    <fragment-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="200dp"-->
-<!--        android:id="@+id/youtube_view"/>-->
+<!--        android:name="com.google.android.youtube.player.YouTubePlayerFragment"-->
+<!--        android:id="@+id/official_player_view"/>-->
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:name="com.google.android.youtube.player.YouTubePlayerFragment"
-        android:id="@+id/official_player_view"/>
-
-    <TextView
+    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_module_text"
-        android:layout_below="@id/official_player_view"/>
+        android:id="@+id/third_party_player_view" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        app:cardElevation="4dp"
+        android:layout_below="@id/third_party_player_view">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_module_text"
+                android:textColor="@color/black"
+                android:fontFamily="serif-monospace"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textAlignment="viewStart"
+                />
+
+        </ScrollView>
+
+
+    </androidx.cardview.widget.CardView>
+
+
 
 </RelativeLayout>
