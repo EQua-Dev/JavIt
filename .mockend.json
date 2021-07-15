@@ -1,0 +1,54 @@
+{
+  "Overview": {
+    "1": {
+      "id": "1",
+      "topic": "What is Computer Programming?",
+      "content": "Computer programming is the process of designing and building an executable computer program to accomplish a specific computing result or to perform a specific task."
+    },
+    "2": {
+      "id": "2",
+      "topic": "What is a Programming Language?",
+      "content": "A programming language is a set of commands, instructions, and other syntax use to create a software program. Languages that programmers use to write code are called \"high-level languages.\" This code can be compiled into a \"low-level language,\" which is recognized directly by the computer hardware."
+    },
+    "3": {
+      "id": "3",
+      "topic": "What is Java Programming Language?",
+      "content": "Java is a computer programming language. It enables programmers to write computer instructions using English-based commands instead of having to write in numeric codes. It’s known as a high-level language because it can be read and written easily by humans."
+    },
+    "4": {
+      "id": "4",
+      "topic": "Who Created Java?",
+      "content": "In the early 90s, Java, which originally went by the name Oak and then Green, was created by a team led by James Gosling for Sun Microsystems, a company now owned by Oracle. Java was originally designed for use on digital mobile devices, such as cellphones. However, when Java 1.0 was released to the public in 1996, its main focus had shifted to use on the internet, providing interactivity with users by giving developers a way to produce animated web pages."
+    },
+    "5": {
+      "id": "5",
+      "topic": "Why Choose Java?",
+      "content": "??"
+    },
+    "6": {
+      "id": "6",
+      "topic": "Ease of Use",
+      "content": "The fundamentals of Java came from a programming language called C++. Although C++ is a powerful language, it is complex in its syntax and inadequate for some of Java's requirements. Java built on and improved the ideas of C++ to provide a programming language that was powerful and simple to use."
+    },
+    "7": {
+      "id": "7",
+      "topic": "Reliability",
+      "content": "Java needed to reduce the likelihood of fatal errors from programmer mistakes. With this in mind, object-oriented programming was introduced. When data and its manipulation were packaged together in one place, Java was robust."
+    },
+    "8": {
+      "id": "8",
+      "topic": "Security",
+      "content": "Because Java was originally targeting mobile devices that would be exchanging data over networks, it was built to include a high level of security. Java is probably the most secure programming language to date."
+    },
+    "9": {
+      "id": "9",
+      "topic": "Platform Independence",
+      "content": "Programs need to work regardless of the machines they're being executed on. Java was written to be a portable and cross-platform language that doesn't care about the operating system, hardware, or devices that it's running on."
+    },
+    "10": {
+      "id": "10",
+      "topic": "So?",
+      "content": "Join Us...Explore The Java World!!"
+    }
+  }
+}
