@@ -54,13 +54,32 @@ class Module : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        //get the information of the selected module
         if (arguments?.getString("vidId") != null){
             vidId = arguments?.getString("vidId")!!
             modInfo = arguments?.getString("mod_txt")!!
         }
-
-//        val youtubePlayerFragment = YouTubePlayerFragment()
-//        youtubePlayerFragment.initialize("AIzaSyBnInSfd0VtNuan7blaRXrc2saqHDDTCHU", this)
+//
+//        val youtubePlayerFragment = activity?.supportFragmentManager?.findFragmentById(R.id.third_party_player_view) as YouTubePlayerSupportFragment
+//        //YouTubePlayerFragment()
+//        youtubePlayerFragment.initialize("AIzaSyBnInSfd0VtNuan7blaRXrc2saqHDDTCHU", object : YouTubePlayer.OnInitializedListener{
+//            override fun onInitializationSuccess(
+//                p0: YouTubePlayer.Provider?,
+//                p1: YouTubePlayer?,
+//                p2: Boolean
+//            ) {
+//
+//            }
+//
+//            override fun onInitializationFailure(
+//                p0: YouTubePlayer.Provider?,
+//                p1: YouTubeInitializationResult?
+//            ) {
+//                TODO("Not yet implemented")
+//            }
+//
+//        })
+//        youtubePlayerFragment.initialize("AIzaSyBnInSfd0VtNuan7blaRXrc2saqHDDTCHU",activity)
 //        val fragmentManager = requireFragmentManager()
 //        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
 //        fragmentTransaction.replace(R.id.official_player_view, youtubePlayerFragment as Fragment)
@@ -72,6 +91,7 @@ class Module : Fragment() {
 
         Log.d("EQUA", "onReady: $vidId")
 
+        //fetches the youtube video and embeds it on the layout
         third_party_player_view.getPlayerUiController().showFullscreenButton(true)
         third_party_player_view.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer) {
@@ -83,6 +103,7 @@ class Module : Fragment() {
         })
 
 
+        //sets the controls to the youtube video
         third_party_player_view.getPlayerUiController().setFullScreenButtonClickListener(View.OnClickListener {
             if (third_party_player_view.isFullScreen()){
                 third_party_player_view.exitFullScreen()

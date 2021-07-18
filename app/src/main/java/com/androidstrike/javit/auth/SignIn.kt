@@ -104,8 +104,9 @@ class SignIn : Fragment() {
 
                 if (it.isSuccessful) {
                     //login success
-                    Common.currentUser = User(firebaseUser?.uid!!, firebaseUser!!.email)
+                    Common.currentUser = User(firebaseUser?.uid!!, firebaseUser?.email)
                     activity?.login()
+
 
 
 

@@ -17,9 +17,9 @@
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="64dp"
-            android:src="@drawable/ic_baseline_person_outline_24"
+            android:src="@drawable/java_logo"
             app:civ_border_color="@color/black"
-            app:civ_border_width="2dp" />
+            app:civ_border_width="1dp" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

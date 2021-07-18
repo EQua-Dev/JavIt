@@ -8,7 +8,7 @@ import com.androidstrike.javit.R
 import com.androidstrike.javit.databinding.RecyclerViewOverviewBinding
 import com.androidstrike.javit.models.OverView
 
-
+//adapter class to populate each information on the various overview cards
 class OverViewAdapter : RecyclerView.Adapter<OverViewAdapter.OverViewHolder>() {
 
     private var overViews: List<OverView>? = null

@@ -1,50 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".landing.fragments.Module">
 
 <!--    <fragment-->
+<!--        android:id="@+id/official_player_view"-->
+<!--        android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="200dp"-->
-<!--        android:name="com.google.android.youtube.player.YouTubePlayerFragment"-->
-<!--        android:id="@+id/official_player_view"/>-->
+<!--        tools:ignore="Instantiatable" />-->
 
-    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/third_party_player_view" />
+<!--View Layout to display the YouTube Video -->
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/third_party_player_view" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/third_party_player_view"
         android:layout_margin="12dp"
-        app:cardElevation="4dp"
-        android:layout_below="@id/third_party_player_view">
+        app:cardElevation="4dp">
 
+<!--        Make its content scrollable-->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp">
 
+<!--            Contains the text for the module-->
             <TextView
+                android:id="@+id/tv_module_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_module_text"
-                android:textColor="@color/black"
                 android:fontFamily="serif-monospace"
-                android:textStyle="bold"
-                android:textSize="16sp"
                 android:textAlignment="viewStart"
-                />
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
         </ScrollView>
 
 
     </androidx.cardview.widget.CardView>
-
 
 
 </RelativeLayout>

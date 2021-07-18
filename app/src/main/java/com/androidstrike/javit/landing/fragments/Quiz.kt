@@ -48,6 +48,7 @@ class Quiz : Fragment(), View.OnClickListener {
 
         showQuestion(index)
 
+        //makes the option buttons clickable
         btn_answerA?.setOnClickListener(this)
         btn_answerB?.setOnClickListener(this)
         btn_answerC?.setOnClickListener(this)
@@ -59,22 +60,27 @@ class Quiz : Fragment(), View.OnClickListener {
 
 
     override fun onClick(v: View?) {
-        mCountDown?.cancel()
+        //when a button is clicked...
+        mCountDown?.cancel() //stops the timer
         if (index < totalQuestion){
 
             var clickedButton =  v as Button
+
             if (clickedButton.text.equals(Common.questionList[index].correctAnswer)){
+                //if the correct answer is selected
                 activity?.toast(clickedButton.text.toString())
-                score += 10
+                score += 10 //adds to the user's score
                 correctAnswer++
-                showQuestion(index++)
+                showQuestion(index++) //shows the next question
             }else{
-                showQuestion(index++)
+                //if wrong answer is selected
+                showQuestion(index++) //only shows next question
             }
 
             txt_score?.text = String.format("%d", score)
         }
         else{
+            //if the quiz is done, sends the concluded info to the finish screen
             val frag_done = QuizDone()
 
             val bundle = Bundle()

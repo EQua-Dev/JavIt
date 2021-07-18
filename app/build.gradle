@@ -57,7 +57,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Youtube Android Player API Jar dependency
-//    implementation file('libs/YouTubeAndroidPlayerApi.jar')
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
 
 
 

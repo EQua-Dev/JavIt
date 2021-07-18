@@ -1,6 +1,7 @@
 package com.androidstrike.javit.landing.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +21,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class Overview : Fragment(), CardStackListener {
+class OverviewFragment : Fragment(), CardStackListener {
 
     private val adapter = OverViewAdapter()
     private lateinit var layoutManager:  CardStackLayoutManager
@@ -38,6 +39,7 @@ class Overview : Fragment(), CardStackListener {
             setOverlayInterpolator(LinearInterpolator())
         }
 
+        //this below lines of code make the information on the landing page to be in swipeable cards
         stack_view.layoutManager = layoutManager
         stack_view.adapter = adapter
         stack_view.itemAnimator.apply {
@@ -46,6 +48,7 @@ class Overview : Fragment(), CardStackListener {
             }
         }
 
+        //the code below gets the info from the REST API to be displayed on the swipeable cards
         OverViewAPI().getOverview().enqueue(object : Callback<List<OverView>>{
             override fun onResponse(
                 call: Call<List<OverView>>,
@@ -53,15 +56,14 @@ class Overview : Fragment(), CardStackListener {
             ) {
                 response.body()?.let {
                     adapter.setOverviews(it)
+                    Log.d("EQua", "onResponse: $it")
                 }
             }
 
             override fun onFailure(call: Call<List<OverView>>, t: Throwable) {
-
+                Log.d("EQua", "onFailure: ${t.message}")
             }
-
         })
-
     }
 
     override fun onCardDragging(direction: Direction?, ratio: Float) {
